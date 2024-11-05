@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
+import org.springframework.dao.DuplicateKeyException;
 
 @Service
 @RequiredArgsConstructor
@@ -26,6 +27,9 @@ public class ProductService {
 
     @Transactional
     public Product create(Product product) {
+        if (productRepository.existsByNameIgnoreCase(product.getName())) {
+            throw new DuplicateKeyException("A product with this name already exists");
+        }
         return productRepository.save(product);
     }
 

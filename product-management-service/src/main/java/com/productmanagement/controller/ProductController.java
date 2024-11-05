@@ -2,7 +2,10 @@ package com.productmanagement.controller;
 
 import com.productmanagement.model.Product;
 import com.productmanagement.service.ProductService;
+import com.productmanagement.exception.ErrorResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -24,8 +27,15 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<Product> create(@RequestBody Product product) {
-        return ResponseEntity.ok(productService.create(product));
+    public ResponseEntity<?> create(@RequestBody Product product) {
+        try {
+            Product createdProduct = productService.create(product);
+            return ResponseEntity.ok(createdProduct);
+        } catch (DuplicateKeyException e) {
+            return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .body(new ErrorResponse("A product with this name already exists"));
+        }
     }
 
     @PutMapping("/{id}")
