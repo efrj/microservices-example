@@ -11,14 +11,16 @@
         <relativePath/>
     </parent>
 
-    <groupId>com.exemplo</groupId>
-    <artifactId>meu-projeto</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>meu-projeto</name>
-    <description>Meu primeiro projeto Spring Boot</description>
+    <groupId>com.productmanagement</groupId>
+    <artifactId>product-service</artifactId>
+    <version>1.0.0</version>
+    <name>product-service</name>
+    <description>Microservice for Product Management</description>
 
     <properties>
         <java.version>17</java.version>
+        <mysql.version>8.0.33</mysql.version>
+        <lombok.version>1.18.30</lombok.version>
     </properties>
 
     <dependencies>
@@ -32,6 +34,24 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <optional>true</optional>
+        </dependency>
     </dependencies>
 
     <build>
@@ -39,6 +59,14 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
             </plugin>
         </plugins>
     </build>

@@ -1,0 +1,6 @@
+/home/tinoco/devel/playground/practice-tests/java-microservices-example/product-management-service/src/main/java/com/productmanagement/Application.java
+/home/tinoco/devel/playground/practice-tests/java-microservices-example/product-management-service/src/main/java/com/productmanagement/service/ProductService.java
+/home/tinoco/devel/playground/practice-tests/java-microservices-example/product-management-service/src/main/java/com/productmanagement/exception/GlobalExceptionHandler.java
+/home/tinoco/devel/playground/practice-tests/java-microservices-example/product-management-service/src/main/java/com/productmanagement/model/Product.java
+/home/tinoco/devel/playground/practice-tests/java-microservices-example/product-management-service/src/main/java/com/productmanagement/controller/ProductController.java
+/home/tinoco/devel/playground/practice-tests/java-microservices-example/product-management-service/src/main/java/com/productmanagement/repository/ProductRepository.java
