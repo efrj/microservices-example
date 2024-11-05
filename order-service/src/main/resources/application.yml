@@ -1,0 +1,35 @@
+micronaut:
+  application:
+    name: orderService
+
+datasources:
+  default:
+    url: jdbc:postgresql://0.0.0.0:5490/order_management
+    driverClassName: org.postgresql.Driver
+    username: postgres
+    password: 1234
+
+jpa:
+  default:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+        show_sql: true
+
+flyway:
+  datasources:
+    default:
+      enabled: true
+      create-schemas: true
+      create-database: true
+      locations:
+        - classpath:db/migration
+      init-sql: classpath:init-db.sql
+
+data:
+  pageable:
+    default-page-size: 20
+  sort:
+    properties:
+      default-sort-direction: asc
