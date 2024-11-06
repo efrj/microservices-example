@@ -1,0 +1,101 @@
+{
+    "info": {
+      "name": "Order Management API",
+      "_postman_id": "order-management-api",
+      "description": "Endpoints for the Order Management Service",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "Create Order",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"buyerId\": \"buyer123\",\n  \"status\": \"PENDING\",\n  \"totalAmount\": 100.00,\n  \"items\": [\n    {\n      \"productId\": 1,\n      \"quantity\": 2,\n      \"price\": 50.00\n    }\n  ]\n}"
+          },
+          "url": {
+            "raw": "http://localhost:3000/api/v1/orders",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "3000",
+            "path": ["api", "v1", "orders"]
+          },
+          "description": "Create a new order"
+        }
+      },
+      {
+        "name": "Get All Orders",
+        "request": {
+          "method": "GET",
+          "url": {
+            "raw": "http://localhost:3000/api/v1/orders",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "3000",
+            "path": ["api", "v1", "orders"]
+          },
+          "description": "Get all orders"
+        }
+      },
+      {
+        "name": "Get Order by ID",
+        "request": {
+          "method": "GET",
+          "url": {
+            "raw": "http://localhost:3000/api/v1/orders/1",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "3000",
+            "path": ["api", "v1", "orders", "1"]
+          },
+          "description": "Get a specific order by ID"
+        }
+      },
+      {
+        "name": "Update Order Status",
+        "request": {
+          "method": "PUT",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"status\": \"COMPLETED\"\n}"
+          },
+          "url": {
+            "raw": "http://localhost:3000/api/v1/orders/1",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "3000",
+            "path": ["api", "v1", "orders", "1"]
+          },
+          "description": "Update the status of an order"
+        }
+      },
+      {
+        "name": "Cancel Order",
+        "request": {
+          "method": "DELETE",
+          "url": {
+            "raw": "http://localhost:3000/api/v1/orders/1",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "3000",
+            "path": ["api", "v1", "orders", "1"]
+          },
+          "description": "Cancel an order (set status to CANCELLED)"
+        }
+      }
+    ]
+  }
+  
