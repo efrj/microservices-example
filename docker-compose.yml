@@ -1,0 +1,48 @@
+services:
+  postgres:
+    image: postgres:11.1-alpine
+    ports:
+      - 5490:5432
+    container_name: microservices_example_postgres
+    volumes:
+      - ./databases/postgres-data:/var/lib/postgresql/data
+      - ./scripts:/scripts
+    environment:
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=order_management
+  
+  mysql:
+    image: mysql:5.7
+    volumes:
+      - ./databases/mysql-data:/var/lib/mysql
+      - ./scripts:/scripts
+    ports:
+      - 3320:3306
+    container_name: microservices_example_mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_DATABASE=product_management
+
+  product-service:
+    build:
+      context: ./product-management-service
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/product_management
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=1234
+
+  order-service:
+    build:
+      context: ./order-management-service
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+    environment:
+      - DATABASE_URL=postgresql://postgres:1234@postgres:5432/order_management
